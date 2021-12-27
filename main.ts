@@ -1,4 +1,4 @@
-function prevestOdpoved (text: string) {
+function spocitejVyskyty (text: string) {
 	switch (text) {
         case "A":
             Acount++
@@ -16,7 +16,7 @@ function prevestOdpoved (text: string) {
 }
 input.onButtonPressed(Button.A, function () {
     for (let item of answers) {
-        prevestOdpoved(item)       
+        spocitejVyskyty(item)
     }
 
     basic.showString("" + A + " " + Acount)
@@ -28,6 +28,10 @@ input.onButtonPressed(Button.A, function () {
 input.onButtonPressed(Button.B, function () {
     answers = []
     serialNumbers = []
+    Acount = 0
+    Bcount = 0
+    Ccount = 0
+    Dcount = 0
 })
 radio.onReceivedValue(function (name, value) {
     contains = false
