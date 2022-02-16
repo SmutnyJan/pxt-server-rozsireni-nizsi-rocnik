@@ -5,7 +5,7 @@ input.onButtonPressed(Button.B, function () {
     Server.NoveHlasovani()
 })
 radio.onReceivedValue(function (name, value) {
-    Server.PrijmoutHlas(name, value)
+    Server.ZaznamenatHlas(name, value)
 })
 radio.setGroup(1)
 Server.VychoziNastaveni(
@@ -14,6 +14,3 @@ Server.VychoziNastaveni(
 "NEVIM",
 "MOZNA"
 )
-basic.forever(function () {
-	
-})

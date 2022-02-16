@@ -39,6 +39,10 @@ namespace Server {
     //% block="Zobraz výsledky"
 
     export function ZobrazVysledky(): void {
+        Dcount = 0
+        Ccount = 0
+        Bcount = 0
+        Acount = 0
         for (let item of answers) {
             spocitejVyskyty(item)
         }
@@ -67,7 +71,7 @@ namespace Server {
     */
     //% block="Zaznamenej hlas %hlas se seriovým číslem %serioveCislo"
 
-    export function PrijmoutHlas(hlas: string, serioveCislo: number): void {
+    export function ZaznamenatHlas(hlas: string, serioveCislo: number): void {
         let contains = false
         for (let number of serialNumbers) {
             if (number == serioveCislo) {
@@ -84,10 +88,6 @@ namespace Server {
 
 
     function spocitejVyskyty(text: string) {
-        Dcount = 0
-        Ccount = 0
-        Bcount = 0
-        Acount = 0
         switch (text.toLowerCase()) {
             case "a":
                 Acount++
