@@ -25,7 +25,7 @@ namespace Server {
     */
     //% block="Nastav hlasovací hodnoty A: %a B: %b C: %c D: %d"
 
-    export function VychoziNastaveni(Aoption: string, Boption: string, Coption: string, Doption: string): void {
+    export function vychoziNastaveni(Aoption: string, Boption: string, Coption: string, Doption: string): void {
         A = Aoption;
         B = Boption;
         C = Coption;
@@ -38,7 +38,7 @@ namespace Server {
     */
     //% block="Zobraz výsledky"
 
-    export function ZobrazVysledky(): void {
+    export function zobrazVysledky(): void {
         Dcount = 0
         Ccount = 0
         Bcount = 0
@@ -57,7 +57,7 @@ namespace Server {
     */
     //% block="Spusť nové hlasování"
 
-    export function NoveHlasovani(): void {
+    export function noveHlasovani(): void {
         answers = []
         serialNumbers = []
         Acount = 0
@@ -71,7 +71,7 @@ namespace Server {
     */
     //% block="Zaznamenej hlas %hlas se seriovým číslem %serioveCislo"
 
-    export function ZaznamenatHlas(hlas: string, serioveCislo: number): void {
+    export function zaznamenatHlas(hlas: string, serioveCislo: number): void {
         let contains = false
         for (let number of serialNumbers) {
             if (number == serioveCislo) {

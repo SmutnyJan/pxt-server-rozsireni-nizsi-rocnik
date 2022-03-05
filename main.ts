@@ -1,14 +1,14 @@
 input.onButtonPressed(Button.A, function () {
-    Server.ZobrazVysledky()
+    Server.zobrazVysledky()
 })
 input.onButtonPressed(Button.B, function () {
-    Server.NoveHlasovani()
+    Server.noveHlasovani()
 })
 radio.onReceivedValue(function (name, value) {
-    Server.ZaznamenatHlas(name, value)
+    Server.zaznamenatHlas(name, value)
 })
 radio.setGroup(1)
-Server.VychoziNastaveni(
+Server.vychoziNastaveni(
 "ANO",
 "NE",
 "NEVIM",
