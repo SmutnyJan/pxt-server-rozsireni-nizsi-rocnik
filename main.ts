@@ -12,5 +12,5 @@ Server.vychoziNastaveni(
 "ANO",
 "NE",
 "NEVIM",
-"MOZNA"
+"?"
 )

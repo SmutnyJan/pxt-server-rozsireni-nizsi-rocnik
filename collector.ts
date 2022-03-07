@@ -1,35 +1,31 @@
-/**
- * Použijte tento soubor k definování personalizovaných funkcí a bloků.
- * Přečtěte si více na https://makecode.microbit.org/blocks/custom
- */
-
-
-/**
- * Custom blocks
- */
-//% weight=100 color=#3bccc0 icon="\uf233"
+//% weight=100 color=#3bccc0 icon="\uf233" block="Server"
 namespace Server {
-    let A = "";
-    let B = "";
-    let C = "";
-    let D = "";
-    let Dcount = 0
-    let Ccount = 0
-    let Bcount = 0
-    let Acount = 0
-    let serialNumbers: number[] = []
-    let answers: string[] = []
+    let a = "";
+    let b = "";
+    let c = "";
+    let d = "";
+    let pocetD = 0
+    let pocetC = 0
+    let pocetB = 0
+    let pocetA = 0
+    let seriovaCisla: number[] = []
+    let odpovedi: string[] = []
     
     /**
     * Nastaví hodnoty pro různé hlasovací možnosti
-    */
-    //% block="Nastav hlasovací hodnoty A: %a B: %b C: %c D: %d"
+    * @moznostA Hlasovací možnost A
+    * @moznostB Hlasovací možnost B
+    * @moznostC Hlasovací možnost C
+    * @moznostD Hlasovací možnost D
 
-    export function vychoziNastaveni(Aoption: string, Boption: string, Coption: string, Doption: string): void {
-        A = Aoption;
-        B = Boption;
-        C = Coption;
-        D = Doption;
+    */
+    //% block="Nastav hlasovací hodnoty A: %moznostA B: %moznostB C: %moznostC D: %moznostD"
+
+    export function vychoziNastaveni(moznostA: string, moznostB: string, moznostC: string, moznostD: string): void {
+        a = moznostA;
+        b = moznostB;
+        c = moznostC;
+        d = moznostD;
     }
 
 
@@ -39,17 +35,17 @@ namespace Server {
     //% block="Zobraz výsledky"
 
     export function zobrazVysledky(): void {
-        Dcount = 0
-        Ccount = 0
-        Bcount = 0
-        Acount = 0
-        for (let item of answers) {
+        pocetD = 0
+        pocetC = 0
+        pocetB = 0
+        pocetA = 0
+        for (let item of odpovedi) {
             spocitejVyskyty(item)
         }
-        basic.showString("" + A + " " + Acount)
-        basic.showString("" + B + " " + Bcount)
-        basic.showString("" + C + " " + Ccount)
-        basic.showString("" + D + " " + Dcount)
+        basic.showString("" + a + " " + pocetA)
+        basic.showString("" + b + " " + pocetB)
+        basic.showString("" + c + " " + pocetC)
+        basic.showString("" + d + " " + pocetD)
     }
 
     /**
@@ -58,12 +54,12 @@ namespace Server {
     //% block="Spusť nové hlasování"
 
     export function noveHlasovani(): void {
-        answers = []
-        serialNumbers = []
-        Acount = 0
-        Bcount = 0
-        Ccount = 0
-        Dcount = 0
+        odpovedi = []
+        seriovaCisla = []
+        pocetA = 0
+        pocetB = 0
+        pocetC = 0
+        pocetD = 0
     }
 
     /**
@@ -72,17 +68,17 @@ namespace Server {
     //% block="Zaznamenej hlas %hlas se seriovým číslem %serioveCislo"
 
     export function zaznamenatHlas(hlas: string, serioveCislo: number): void {
-        let contains = false
-        for (let number of serialNumbers) {
+        let obsahuje = false
+        for (let number of seriovaCisla) {
             if (number == serioveCislo) {
-                contains = true
+                obsahuje = true
             }
         }
-        if (contains == false) {
-            answers.push(hlas)
-            serialNumbers.push(serioveCislo)
+        if (obsahuje == false) {
+            odpovedi.push(hlas)
+            seriovaCisla.push(serioveCislo)
         } else {
-            answers[serialNumbers.indexOf(serioveCislo)] = hlas
+            odpovedi[seriovaCisla.indexOf(serioveCislo)] = hlas
         }
     }
 
@@ -90,16 +86,16 @@ namespace Server {
     function spocitejVyskyty(text: string) {
         switch (text.toLowerCase()) {
             case "a":
-                Acount++
+                pocetA++
                 break
             case "b":
-                Bcount++
+                pocetB++
                 break
             case "c":
-                Ccount++
+                pocetC++
                 break
             case "d":
-                Dcount++
+                pocetD++
                 break
         }
     }
