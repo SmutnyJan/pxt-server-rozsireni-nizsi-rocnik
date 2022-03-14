@@ -68,6 +68,10 @@ namespace Server {
     //% block="Zaznamenej hlas %hlas se seriovým číslem %serioveCislo"
 
     export function zaznamenatHlas(hlas: string, serioveCislo: number): void {
+        if(serioveCislo == 0) {
+            return
+        }
+        
         let obsahuje = false
         for (let number of seriovaCisla) {
             if (number == serioveCislo) {
