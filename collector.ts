@@ -64,6 +64,8 @@ namespace Server {
 
     /**
     * Zaznamená nový hlas
+    * @hlas Hlas k zaznamenání
+    * @serioveCislo Sériové číslo odesílatele
     */
     //% block="Zaznamenej hlas %hlas se seriovým číslem %serioveCislo"
 
