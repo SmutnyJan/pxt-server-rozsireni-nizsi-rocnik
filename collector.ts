@@ -1,31 +1,31 @@
 //% weight=100 color=#3bccc0 icon="\uf233" block="Server"
-namespace Server {
+namespace server {
     let a = "";
     let b = "";
     let c = "";
     let d = "";
-    let pocetD = 0
-    let pocetC = 0
-    let pocetB = 0
-    let pocetA = 0
-    let seriovaCisla: number[] = []
-    let odpovedi: string[] = []
+    let aCount = 0
+    let bCount = 0
+    let cCount = 0
+    let dCount = 0
+    let serialNumbers: number[] = []
+    let answers: string[] = []
     
     /**
     * Nastaví hodnoty pro různé hlasovací možnosti
-    * @moznostA Hlasovací možnost A
-    * @moznostB Hlasovací možnost B
-    * @moznostC Hlasovací možnost C
-    * @moznostD Hlasovací možnost D
+    * @optionA Hlasovací možnost A
+    * @optionB Hlasovací možnost B
+    * @optionC Hlasovací možnost C
+    * @optionD Hlasovací možnost D
 
     */
-    //% block="Nastav hlasovací hodnoty A: %moznostA B: %moznostB C: %moznostC D: %moznostD"
+    //% block="Nastav hlasovací hodnoty A: %optionA B: %optionB C: %optionC D: %optionD"
 
-    export function vychoziNastaveni(moznostA: string, moznostB: string, moznostC: string, moznostD: string): void {
-        a = moznostA;
-        b = moznostB;
-        c = moznostC;
-        d = moznostD;
+    export function initialSetup(optionA: string, optionB: string, optionC: string, optionD: string): void {
+        a = optionA;
+        b = optionB;
+        c = optionC;
+        d = optionD;
     }
 
 
@@ -34,18 +34,19 @@ namespace Server {
     */
     //% block="Zobraz výsledky"
 
-    export function zobrazVysledky(): void {
-        pocetD = 0
-        pocetC = 0
-        pocetB = 0
-        pocetA = 0
-        for (let item of odpovedi) {
-            spocitejVyskyty(item)
+    export function showResults(): void {
+        aCount = 0
+        bCount = 0
+        cCount = 0
+        dCount = 0
+
+        for (let item of answers) {
+            countOccurrences(item)
         }
-        basic.showString("" + a + " " + pocetA)
-        basic.showString("" + b + " " + pocetB)
-        basic.showString("" + c + " " + pocetC)
-        basic.showString("" + d + " " + pocetD)
+        basic.showString("" + a + " " + aCount)
+        basic.showString("" + b + " " + bCount)
+        basic.showString("" + c + " " + cCount)
+        basic.showString("" + d + " " + dCount)
     }
 
     /**
@@ -53,55 +54,55 @@ namespace Server {
     */
     //% block="Spusť nové hlasování"
 
-    export function noveHlasovani(): void {
-        odpovedi = []
-        seriovaCisla = []
-        pocetA = 0
-        pocetB = 0
-        pocetC = 0
-        pocetD = 0
+    export function newVoting(): void {
+        answers = []
+        serialNumbers = []
+        aCount = 0
+        bCount = 0
+        cCount = 0
+        dCount = 0
     }
 
     /**
     * Zaznamená nový hlas
-    * @hlas Hlas k zaznamenání
-    * @serioveCislo Sériové číslo odesílatele
+    * @vote Hlas k zaznamenání
+    * @serialNumber Sériové číslo odesílatele
     */
-    //% block="Zaznamenej hlas %hlas se seriovým číslem %serioveCislo"
+    //% block="Zaznamenej hlas %vote se seriovým číslem %serialNumber"
 
-    export function zaznamenatHlas(hlas: string, serioveCislo: number): void {
-        if(serioveCislo == 0) {
+    export function addVote(vote: string, serialNumber: number): void {
+        if (serialNumber == 0) {
             return
         }
         
         let obsahuje = false
-        for (let number of seriovaCisla) {
-            if (number == serioveCislo) {
+        for (let number of serialNumbers) {
+            if (number == serialNumber) {
                 obsahuje = true
             }
         }
         if (obsahuje == false) {
-            odpovedi.push(hlas)
-            seriovaCisla.push(serioveCislo)
+            answers.push(vote)
+            serialNumbers.push(serialNumber)
         } else {
-            odpovedi[seriovaCisla.indexOf(serioveCislo)] = hlas
+            answers[serialNumbers.indexOf(serialNumber)] = vote
         }
     }
 
 
-    function spocitejVyskyty(text: string) {
+    function countOccurrences(text: string) {
         switch (text.toLowerCase()) {
             case "a":
-                pocetA++
+                aCount++
                 break
             case "b":
-                pocetB++
+                bCount++
                 break
             case "c":
-                pocetC++
+                cCount++
                 break
             case "d":
-                pocetD++
+                dCount++
                 break
         }
     }

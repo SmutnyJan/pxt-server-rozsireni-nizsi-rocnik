@@ -1,14 +1,14 @@
 input.onButtonPressed(Button.A, function () {
-    Server.zobrazVysledky()
+    server.showResults()
 })
 radio.onReceivedString(function (receivedString) {
-    Server.zaznamenatHlas(receivedString, radio.receivedPacket(RadioPacketProperty.SerialNumber))
+    server.addVote(receivedString, radio.receivedPacket(RadioPacketProperty.SerialNumber))
 })
 input.onButtonPressed(Button.B, function () {
-    Server.noveHlasovani()
+    server.newVoting()
 })
 radio.setGroup(1)
-Server.vychoziNastaveni(
+server.initialSetup(
 "ANO",
 "NE",
 "NEVIM",
