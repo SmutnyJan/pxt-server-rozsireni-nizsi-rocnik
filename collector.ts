@@ -74,19 +74,27 @@ namespace server {
         if (serialNumber == 0) {
             return
         }
-        
-        let obsahuje = false
+
+        vote = toUpperCase(vote)
+        let contains = false
         for (let number of serialNumbers) {
             if (number == serialNumber) {
-                obsahuje = true
+                contains = true
             }
         }
-        if (obsahuje == false) {
+        if (contains == false) {
             answers.push(vote)
             serialNumbers.push(serialNumber)
-        } else {
-            answers[serialNumbers.indexOf(serialNumber)] = vote
         }
+    }
+
+    /**
+    * Vrátí pole odpovědí
+    */
+    //% block="Získej odpovědi"
+
+    export function currentAnswers(): string[] {
+        return answers
     }
 
 
@@ -104,6 +112,25 @@ namespace server {
             case "d":
                 dCount++
                 break
+        }
+    }
+
+    function toUpperCase(text: string): string {
+        switch (text) {
+            case "a":
+                return "A"
+                break
+            case "b":
+                return "B"
+                break
+            case "c":
+                return "C"
+                break
+            case "d":
+                return "D"
+                break
+            default:
+                return text
         }
     }
 
