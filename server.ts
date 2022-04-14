@@ -1,32 +1,11 @@
 //% weight=100 color=#3bccc0 icon="\uf233" block="Server"
 namespace server {
-    let a = "";
-    let b = "";
-    let c = "";
-    let d = "";
     let aCount = 0
     let bCount = 0
     let cCount = 0
     let dCount = 0
     let serialNumbers: number[] = []
     let answers: string[] = []
-
-    /**
-    * Nastaví hodnoty pro různé hlasovací možnosti
-    * @optionA Hlasovací možnost A
-    * @optionB Hlasovací možnost B
-    * @optionC Hlasovací možnost C
-    * @optionD Hlasovací možnost D
-
-    */
-    //% block="Nastav hlasovací hodnoty A: %optionA B: %optionB C: %optionC D: %optionD"
-
-    export function initialSetup(optionA: string, optionB: string, optionC: string, optionD: string): void {
-        a = optionA;
-        b = optionB;
-        c = optionC;
-        d = optionD;
-    }
 
 
     /**
@@ -43,10 +22,10 @@ namespace server {
         for (let item of answers) {
             countOccurrences(item)
         }
-        basic.showString("" + a + " " + aCount)
-        basic.showString("" + b + " " + bCount)
-        basic.showString("" + c + " " + cCount)
-        basic.showString("" + d + " " + dCount)
+        basic.showString("A " + aCount)
+        basic.showString("B " + bCount)
+        basic.showString("C " + cCount)
+        basic.showString("D " + dCount)
     }
 
     /**
