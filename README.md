@@ -1,40 +1,143 @@
+# Hlasování
 
-> Otevřít tuto stránku v aplikaci [https://smutnyjan.github.io/pxt-voting-collector/](https://smutnyjan.github.io/pxt-voting-collector/)
+## Namespace
+```
+server
+```
+## Popis
+Rozšíření poskytuje rozhraní pro sběr hlasů a simulace hlasování.
+ 
+## Metody
+#### Zobraz výsledky
+```
+function showResults(): void
+```
+- Zobrazí dosavadní výsledky hlasování
+- Bez parametrů
+- Bez návratové hodnoty
 
-## Použít jako rozšíření
+#### Spusť nové hlasování
+```
+function newVoting(): void
+```
+- Spustí nové hlasování a smaže uložená data
+- Bez parametrů
+- Bez návratové hodnoty
 
-Toto úložiště lze přidat jako **rozšíření** v aplikaci MakeCode.
+#### Zaznamenej hlas %vote se seriovým číslem %serialNumber
+```
+function addVote(vote: string, serialNumber: number): void
+```
+- Zaznamená nový hlas
+- Parametry:
+    - hlas (text)
+    - seriové číslo (číslo)
+- Bez návratové hodnoty
+ 
+#### Získej odpovědi
+```
+function currentAnswers(): string[]
+```
+- Vrátí pole se zaznamenanými odpověďmi (například pokud dostaneme pole ["A", "A", "B", "D"], znamená to, že máme celkem 4 hlasy: 2 × A, 1 × B, 0 × C, 1 × D)
+- Návratová hodnota: odpovědi (pole textů)
 
-* otevřít [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* klikněte na možnost **Nový projekt**
-* klikněte na možnost **Rozšíření** v nabídce s ozubeným kolem
-* vyhledat **https://github.com/smutnyjan/pxt-voting-collector** a importovat
 
-## Upravit tento projekt ![Odznak stavu sestavení](https://github.com/smutnyjan/pxt-voting-collector/workflows/MakeCode/badge.svg)
 
-Slouží k úpravě tohoto úložiště v aplikaci MakeCode.
+## Příklady
 
-* otevřít [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* klikněte na možnost **Import** a poté na **Import adresy URL**
-* vložte **https://github.com/smutnyjan/pxt-voting-collector** a klikněte na možnost import
+### Hlasovač
 
-## Náhled bloků
+#### Bloky
 
-Tento obrázek znázorňuje kód z Bloků od posledního potvrzení v hlavní verzi.
-Tento obrázek se může aktualizovat až za několik minut.
+![Těžší příklad](https://github.com/SmutnyJan/pxt-voting-collector/images/voterexample.png)
 
-![Vykreslený náhled bloků](https://github.com/smutnyjan/pxt-voting-collector/raw/master/.github/makecode/blocks.png)
+#### Kód
 
-#### Metadata (slouží k vyhledávání, vykreslování)
+```
+input.onButtonPressed(Button.A, function () {
+    radio.sendString("A")
+    basic.showString("A")
+})
+input.onButtonPressed(Button.AB, function () {
+    radio.sendString("C")
+    basic.showString("C")
+})
+input.onButtonPressed(Button.B, function () {
+    radio.sendString("B")
+    basic.showString("B")
+})
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    radio.sendString("D")
+    basic.showString("D")
+})
+radio.setGroup(1)
+radio.setTransmitSerialNumber(true)
+basic.forever(function () {
+	
+})
+```
 
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+### Hlasování se zobrazením výsledků za pomocí metody z rozšíření
 
-## Popis projektu
+#### Bloky
+![Jednoduchý příklad](https://github.com/SmutnyJan/pxt-voting-collector/images/easyexample.png)
 
-Tento projekt slouží jako „collector“ v úloze Hlasování. Projekt je určen k nahrání na jeden microbit, na který poté budou odesílat data a seriová číslá všechny „hlasovače“ (projekt voter: https://github.com/SmutnyJan/pxt-voting-voter). Shromažďování dat funguje následujícím způsobem: když collector dostane nějakou hodnotu se seriovým číslem, podívá se, jestli dané seriové číslo již nemá ve svém seznamu seriových čísel microbitů, které již hlasovaly. Pokud ne, přídá přijatou hodnotu do pole s hodnotami a serivoé číslo přidá do seznamu se seriovými čísly. Pokud ale již toto seriové číslo hlasovalo, aktualizuje pouze hodnotu => hlasující může změnit svůj názor a znovu hlasovat, ale počet hlasů se nezmění. Nové hlasování se provádí stisknutím tlačítka B (viz ovládání), po kterém se vymaže obsah obou listů (uložená data a seriová čísla). Data jsou přijímána ve formátu A/B/C/D. Samotný převod těchto písmen na nějaké smysluplné hodnoty (vždy 4: pondělí/úterý/středa/čvrtek atd.) probíhá až ve výpisu. V metode spocitejVyskyty se počítají jednotlivé výskyty daných hodnot. Ke změně interpretovaných hodnot stačí pouze změnit proměnné A, B, C, D.
+#### Kód
+```
+input.onButtonPressed(Button.A, function () {
+    server.showResults()
+})
+radio.onReceivedString(function (receivedString) {
+    server.addVote(receivedString, radio.receivedPacket(RadioPacketProperty.SerialNumber))
+})
+input.onButtonPressed(Button.B, function () {
+    server.newVoting()
+})
+radio.setGroup(1)
+```
 
-## Ovládání
+### Hlasování se zobrazením výsledků za pomocí pole z rozšíření
 
-* tlačítko A: zobrazí data ve formátu "interpretovaná hodnota" "počet hlasů pro tuto hodnotu"
-* tlačítko B: vymaže uložená data i list všech hlasujících => úplně nové hlasování
+#### Bloky
+![Těžší příklad](https://github.com/SmutnyJan/pxt-voting-collector/images/hardexample.png)
+
+
+#### Kód
+```
+input.onButtonPressed(Button.A, function () {
+    odpovedi = server.currentAnswers()
+    pocetD = 0
+    pocetC = 0
+    pocetB = 0
+    pocetA = 0
+    for (let hodnota of odpovedi) {
+        if (hodnota == "A") {
+            pocetA += 1
+        } else if (hodnota == "B") {
+            pocetB += 1
+        } else if (hodnota == "C") {
+            pocetC += 1
+        } else if (hodnota == "D") {
+            pocetD += 1
+        }
+    }
+    basic.showString("A" + pocetA)
+    basic.showString("NE" + pocetB)
+    basic.showString("MOZNA" + pocetC)
+    basic.showString("NEVIM" + pocetD)
+})
+radio.onReceivedString(function (receivedString) {
+    server.addVote(receivedString, radio.receivedPacket(RadioPacketProperty.SerialNumber))
+})
+input.onButtonPressed(Button.B, function () {
+    server.newVoting()
+})
+let pocetA = 0
+let pocetB = 0
+let pocetC = 0
+let pocetD = 0
+let odpovedi: string[] = []
+radio.setGroup(1)
+```
+
+
