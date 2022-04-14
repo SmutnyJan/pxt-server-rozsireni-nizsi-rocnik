@@ -49,7 +49,7 @@ function currentAnswers(): string[]
 
 #### Bloky
 
-![Příklad hlasovače](https://github.com/SmutnyJan/pxt-voting-collector/images/voterexample.png)
+![Příklad hlasovače](https://github.com/SmutnyJan/pxt-voting-collector/blob/master/images/voterexample.png)
 
 #### Kód
 
@@ -80,7 +80,7 @@ basic.forever(function () {
 ### Hlasování se zobrazením výsledků za pomocí metody z rozšíření
 
 #### Bloky
-![Jednoduchý příklad](https://github.com/SmutnyJan/pxt-voting-collector/images/easyexample.png)
+![Jednoduchý příklad](https://github.com/SmutnyJan/pxt-voting-collector/blob/master/images/easyexample.png)
 
 #### Kód
 ```
@@ -99,7 +99,7 @@ radio.setGroup(1)
 ### Hlasování se zobrazením výsledků za pomocí pole z rozšíření
 
 #### Bloky
-![Těžší příklad](https://github.com/SmutnyJan/pxt-voting-collector/images/hardexample.png)
+![Těžší příklad](https://github.com/SmutnyJan/pxt-voting-collector/blob/master/images/hardexample.png)
 
 
 #### Kód
