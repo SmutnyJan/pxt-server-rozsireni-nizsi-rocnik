@@ -49,7 +49,7 @@ function currentAnswers(): string[]
 
 #### Bloky
 
-![Těžší příklad](https://github.com/SmutnyJan/pxt-voting-collector/images/voterexample.png)
+![Příklad hlasovače](https://github.com/SmutnyJan/pxt-voting-collector/images/voterexample.png)
 
 #### Kód
 
