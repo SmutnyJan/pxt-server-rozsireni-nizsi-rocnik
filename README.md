@@ -122,9 +122,9 @@ input.onButtonPressed(Button.A, function () {
         }
     }
     basic.showString("A" + pocetA)
-    basic.showString("NE" + pocetB)
-    basic.showString("MOZNA" + pocetC)
-    basic.showString("NEVIM" + pocetD)
+    basic.showString("B" + pocetB)
+    basic.showString("C" + pocetC)
+    basic.showString("D" + pocetD)
 })
 radio.onReceivedString(function (receivedString) {
     server.addVote(receivedString, radio.receivedPacket(RadioPacketProperty.SerialNumber))
